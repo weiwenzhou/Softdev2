@@ -3,5 +3,5 @@ var ctx = canvas.getContext("2d");
 
 canvas.addEventListener("click", function(e){
     console.log(e);
-    //drawRect(
+    ctx.fillRect(e.clientX, e.clientY, 100,100);
 })
