@@ -1,3 +1,8 @@
+// Wei Wen Zhou
+// SoftDev2 pd8
+// K00 -- I See a Red Door...
+// 2019-01-31
+
 var canvas = document.getElementById("slate");
 var ctx = canvas.getContext("2d");
 
@@ -16,11 +21,13 @@ var clear_canvas = function() {
 var toggle = function() {
     // Change the shape between rectangle and dot
     state = !state;
+    /*
     if (state) {
         document.getElementById("state").innerHTML = "Rectangle";
     } else {
         document.getElementById("state").innerHTML = "Dot";
     }
+    */
 }
 
 // when click in canvas draw either a rectangle or ellipse
