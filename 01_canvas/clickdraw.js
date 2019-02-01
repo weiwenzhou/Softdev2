@@ -3,6 +3,21 @@
 // K01 -- ...and I want to Paint It Better
 // 2019-02-01
 
+/*
+Methods and values explained
+e.preventDefault()
+    -Prevents the default action of the eventListener from executing
+    -Use when you want to prevent an action from occur when the user clicks somewhere
+
+ctx.beginPath()
+    -Resets the list of previous click areas (use for creating line)
+    -Starts a new line.
+
+e.offsetX/e.offsetY
+    -The location of x or y coordinate of the mouse pointer relative to the target node
+        in this case the canvas
+*/
+
 var canvas = document.getElementById("slate");
 var ctx = canvas.getContext("2d");
 
@@ -32,9 +47,9 @@ var toggle = function() {
 
 // when click in canvas draw either a rectangle or ellipse
 canvas.addEventListener("click", function(e){
-    //console.log(e);
+    console.log(e);
     if (state) {
-        ctx.fillRect(e.offsetX-50, e.offsetY-50, 100, 100);
+        ctx.fillRect(e.offsetX, e.offsetY, 100, 100);
     } else {
         ctx.beginPath();
         ctx.ellipse(e.offsetX, e.offsetY, 5, 5, 0, 0, 360);
