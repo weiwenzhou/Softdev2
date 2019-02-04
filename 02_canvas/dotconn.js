@@ -8,6 +8,8 @@ var canvas = document.getElementById("playground");
 var ctx = canvas.getContext("2d");
 var width = canvas.width; // width
 var height = canvas.height; // height
+ctx.fillStyle = "#ff0000"; // set the fillstyle to red
+
 
 var clear_canvas = function() {
     // Clears the canvas
@@ -19,6 +21,7 @@ var clear_canvas = function() {
 canvas.addEventListener("click", function(e){
     drawEllipse(e.offsetX, e.offsetY, 10);
     ctx.stroke();
+    ctx.fill();
 })
 
 var drawEllipse = function(mouseX, mouseY, radius){
