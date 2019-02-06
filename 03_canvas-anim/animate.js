@@ -23,13 +23,15 @@ document.getElementById("circle").addEventListener("click", function(e){
 })
 
 var animate = function() {
+    // Increase/Decrease Radius
+    radius = radius + speed;
+    console.log(radius);
     if (radius >= width/2) {
         speed = speed*-1; // Contract
     }
     if (radius <= 0) {
         speed = speed*-1; // Expand
     }
-    radius = radius + speed;
     clear_canvas();
     drawEllipse(250, 250, radius);
 
