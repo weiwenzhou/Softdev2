@@ -1,6 +1,6 @@
-// Datapen - Wei Wen Zhou, Rubin Peci
+// Databend - Wei Wen Zhou, Rubin Peci
 // SoftDev2 pd8
-// K03 --
+// K03 -- They lock us in the tower whenever we get caught ...which is often
 // 2019-02-06
 
 // Canvas Attributes
@@ -12,26 +12,19 @@ ctx.fillStyle = "#ff0000"; // set the fillstyle to red
 
 // State var
 var state; // animation id
-var animated; // whether the circle is being animate or not
 
 // Circle var
 var radius = 2; // Initial radius
-var speed = 2; // Speed at which the radius is expanding/contracting
+var speed = 1; // Speed at which the radius is expanding/contracting
 
 // Animate
-document.getElementById("circle").addEventListener("click", function(e){
-    // Check whether the circle is being animated yet. If not animate it
-    if (animated) {
-        e.preventDefault();
-    } else {
-        state = window.requestAnimationFrame(animate);
-    }
-})
-
-var animate = function() {
+var animateCircle = function() {
     // Draw a circle expanding from the center of the canvas and upon
     // reaching the edge of the canvas contracts
 
+    // Cancel existing animation
+    window.cancelAnimationFrame(state);
+    
     // Increase/Decrease Radius
     radius = radius + speed;
 
@@ -43,29 +36,13 @@ var animate = function() {
     }
 
     clear_canvas();
-    drawEllipse(250, 250, radius);
+    drawEllipse(width/2, height/2, radius);
 
-    // Set animated to true
-    animated = true;
-
-    state = window.requestAnimationFrame(animate);
+    state = window.requestAnimationFrame(animateCircle);
 }
 
 // Stop
-document.getElementById("stop").addEventListener("click", function(e){
-    // Check whether the circle is being animated or not
-    // If animated stop the animation else do nothing
-    if (animate) {
-        stopAnimate();
-    } else {
-        e.preventDefault();
-    }
-})
-
 var stopAnimate = function() {
-    // Set animated to false;
-    animated = false;
-    
     window.cancelAnimationFrame(state);
 }
 
@@ -81,3 +58,10 @@ var clear_canvas = function() {
     // Clears the canvas
     ctx.clearRect(0,0, width, height);
 }
+
+// Event Listeners
+
+// Animate
+document.getElementById("circle").addEventListener("click", animateCircle);
+// Stop
+document.getElementById("stop").addEventListener("click", stopAnimate);
