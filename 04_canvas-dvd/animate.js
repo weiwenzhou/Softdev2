@@ -18,8 +18,8 @@ var radius = 2; // Initial radius
 var speed = 1; // Speed at which the radius is expanding/contracting
 
 // Dvd var
-var logo = new Image();
-logo.src = "logo_dvd.jpg"
+var dvd_width = 100; // Width of image
+var dvd_height = 50; // Height of image
 var dvdX; // The x coordinate of the center of the dvd
 var dvdY; // The y coordinate of the center of the dvd
 var xspeed = 1; // Speed in the x direction
@@ -59,6 +59,18 @@ var dvdsetup = function() {
     // Random center (x,y)
     dvdX = Math.floor(Math.random() * width);
     dvdY = Math.floor(Math.random() * height);
+
+    var logo = new Image();
+    logo.src = "logo_dvd.jpg"
+
+    var dvd = function() {
+
+
+        // Draw Image
+        drawImage
+        state = window.requestAnimationFrame(dvd);
+    }
+    dvd();
 }
 
 
