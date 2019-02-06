@@ -1,7 +1,7 @@
 // Databend - Wei Wen Zhou, Rubin Peci
 // SoftDev2 pd8
 // K03 -- What is it saving the screen from?
-// 2019-02-06
+// 2019-02-07
 
 // Canvas Attributes
 var canvas = document.getElementById("playground");
@@ -16,6 +16,10 @@ var state; // animation id
 // Circle var
 var radius = 2; // Initial radius
 var speed = 1; // Speed at which the radius is expanding/contracting
+
+// Image var
+var logo = new Image();
+logo.src = "logo_dvd.jpg"
 
 // Dvd var
 var dvd_width = 100; // Width of image
@@ -57,17 +61,34 @@ var stopAnimate = function() {
 // Dvd
 var dvdsetup = function() {
     // Random center (x,y)
-    dvdX = Math.floor(Math.random() * width);
-    dvdY = Math.floor(Math.random() * height);
-
-    var logo = new Image();
-    logo.src = "logo_dvd.jpg"
+    // ex. if width = 500, dvd_width = 100 -> the dvdX is between [0,400)
+    dvdX = Math.floor(Math.random() * (width - dvd_width));
+    dvdY = Math.floor(Math.random() * (height - dvd_height));
 
     var dvd = function() {
+        // Cancel existing animation
+        window.cancelAnimationFrame(state);
 
+        // Image is centered on the top right corner...hmm interesting
+
+        // Touches the horizontal edge
+        if (dvdX <= 0 || dvdX + dvd_width >= width) {
+            xspeed = -1*xspeed;
+        }
+
+        // Touches the vertical edge
+        if (dvdY <= 0 || dvdY + dvd_height >= height) {
+            yspeed = -1*yspeed;
+        }
+
+        // Apply translations
+        dvdX = dvdX + xspeed;
+        dvdY = dvdY + yspeed;
 
         // Draw Image
-        drawImage
+        clear_canvas();
+        ctx.drawImage(logo, dvdX, dvdY, dvd_width, dvd_height);
+
         state = window.requestAnimationFrame(dvd);
     }
     dvd();
