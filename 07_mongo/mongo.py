@@ -8,15 +8,21 @@
 
    The raw data is held here: https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json
 
-   The way we imported the information is through this command: mongoimport --db WorldWarZ --collection movies --drop --file movies.json
-   It was a very simple import.'''
+   The way we imported the information is through opening a connection to the server address.
+   We then created the db WorldWarZ and then the collections movies.
+   After that, we opened the .json file, read it, and inserted it into the collection.'''
 
-import pymongo, pprint
+import json, pymongo, pprint
 
 SERVER_ADDR = "157.230.219.18"
 connection = pymongo.MongoClient(SERVER_ADDR)
 db = connection.WorldWarZ
 collection = db.movies
+
+with open('movies.json') as file:
+    file_data = json.load(file)
+
+collection.insert(file_data)
 
 def by_title(title): #prints out movies with specified title
     for doc in collection.find( {"title": title} ):
