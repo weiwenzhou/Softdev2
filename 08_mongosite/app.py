@@ -8,6 +8,16 @@ app.secret_key = os.urandom(32)
 def index():
     return render_template("home.html")
 
+@app.route("/ip")
+def connect():
+    try:
+        connection = pymongo.MongoClient(request.form['ip'])
+        db = connection.WorldWarZ
+        collection = db.movies
+    except:
+        flash("Not a valid ip address to connect to")
+        print("Not a valid ip address to connect to")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
