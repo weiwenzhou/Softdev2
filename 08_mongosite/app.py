@@ -8,7 +8,7 @@ app.secret_key = os.urandom(32)
 def index():
     return render_template("home.html")
 
-@app.route("/ip")
+@app.route("/ip", methods=['POST'])
 def connect():
     try:
         connection = pymongo.MongoClient(request.form['ip'])
