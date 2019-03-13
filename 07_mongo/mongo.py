@@ -14,7 +14,7 @@
 
 import json, pymongo, pprint
 
-SERVER_ADDR = "157.230.219.18"
+SERVER_ADDR = "206.189.184.181"
 connection = pymongo.MongoClient(SERVER_ADDR)
 db = connection.WorldWarZ
 collection = db.movies
@@ -69,4 +69,4 @@ def by_between_years(earlier, later): #prints out movies between specified years
 #by_genre("Animated")
 #by_title_and_year('Jack the Giant Slayer', 2013)
 #by_actor_and_year("Josh Brolin", 2013)
-#by_between_years(2000, 2001)
+by_between_years(2000, 2001)

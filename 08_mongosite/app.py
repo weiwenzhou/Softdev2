@@ -11,7 +11,7 @@ import json
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-SERVER_ADDR = "104.248.49.56"
+SERVER_ADDR = "206.189.184.181"
 connection = pymongo.MongoClient(SERVER_ADDR)
 connection.drop_database("WorldWarZ")
 db = connection.WorldWarZ
