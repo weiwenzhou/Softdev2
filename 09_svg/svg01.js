@@ -10,12 +10,14 @@ var y = null;
 pic.addEventListener('click', function(e) {
     e.preventDefault()
     // console.log(e)
-    if (x != null) {
-        line(pic, x, y, e.offsetX, e.offsetY, "black");
+    if (e.target == pic) {
+        if (x != null) {
+            line(pic, x, y, e.offsetX, e.offsetY, "black");
+        }
+        x = e.offsetX;
+        y = e.offsetY;
+        circle(pic, x, y, "10", "red", "black");
     }
-    x = e.offsetX;
-    y = e.offsetY;
-    circle(pic, x, y, "10", "red", "black");
 });
 
 button.addEventListener('click', function(e){
