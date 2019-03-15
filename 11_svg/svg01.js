@@ -8,27 +8,9 @@ var x = null;
 var y = null;
 
 // Animation Variables
-xspeed = 1;
-yspeed = 1;
-state;
-
-// Event Listeners
-pic.addEventListener('click', function(e) {
-    e.preventDefault()
-    if (e.target == pic) {
-        // console.log(e)
-        // if (x != null) {
-        //     line(pic, x, y, e.offsetX, e.offsetY, "black");
-        // }
-        x = e.offsetX;
-        y = e.offsetY;
-        circle(pic, x, y, "10", "purple", "black");
-    }
-});
-
-button.addEventListener('click', function(e){
-    clear()
-});
+var xspeed = 1;
+var yspeed = 1;
+var state;
 
 // Functions
 var circle = function(canvas, x, y, r, fill, stroke) {
@@ -75,25 +57,63 @@ var clear = function() {
     y = null;
 }
 
+// Get circles
+var get_circles = function(canvas){
+    return canvas.children;
+}
+
+
 // Animate
 var animate = function() {
     // Cancel existing animation
     window.cancelAnimationFrame(state);
 
-    // Touches the horizontal edge
-    if (dvdX <= 0 || dvdX + dvd_width >= width) {
-        xspeed = -1*xspeed;
+    children = get_circles(pic)
+    console.log(children);
+    for (x = 0; x < children.length; x++) {
+        console.log(children.length);
+        child = children[x]
+        x = child.getAttribute("cx");
+        y = child.getAttribute("cy");
+        r = child.getAttribute("r");
+        color = child.getAttribute("fill");
+        stroke = child.getAttribute("stroke");
+
+        // Touches the horizontal edge
+        if (x + r<= 0 || x - r >= 500) {
+            xspeed = -1*xspeed;
+        }
+
+        // Touches the vertical edge
+        if (y + r <= 0 || y - r >= 500) {
+            yspeed = -1*yspeed;
+        }
+
+        // Apply translations
+        x += xspeed;
+        y += yspeed;
+        pic.removeChild(child);
+        circle(x, y, r, color, stroke);
     }
-
-    // Touches the vertical edge
-    if (dvdY <= 0 || dvdY + dvd_height >= height) {
-        yspeed = -1*yspeed;
-    }
-
-    // Apply translations
-    dvdX = dvdX + xspeed;
-    dvdY = dvdY + yspeed;
-    drawEllipse(width/2, height/2, radius);
-
-    state = window.requestAnimationFrame(animateCircle);
+    state = window.requestAnimationFrame(animate);
 }
+
+// Event Listeners
+pic.addEventListener('click', function(e) {
+    // Svg object
+    e.preventDefault()
+    if (e.target == pic) {
+        // console.log(e)
+        // if (x != null) {
+        //     line(pic, x, y, e.offsetX, e.offsetY, "black");
+        // }
+        x = e.offsetX;
+        y = e.offsetY;
+        circle(pic, x, y, "10", "purple", "black");
+    }
+});
+
+// Clear
+button.addEventListener('click', clear);
+// Move
+move_button.addEventListener('click', animate);
