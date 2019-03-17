@@ -15,11 +15,15 @@ var state;
 // Functions
 var circle = function(canvas, x, y, r, fill, stroke) {
     var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
     c.setAttribute( "cx", x);
     c.setAttribute( "cy", y);
     c.setAttribute( "r", r);
     c.setAttribute( "fill", fill);
     c.setAttribute( "stroke", stroke);
+
+    c.setAttribute( "xSpeed", xspeed);
+    c.setAttribute( "ySpeed", yspeed);
 
     c.addEventListener('click', function(e) {
         // console.log(e)
@@ -52,14 +56,14 @@ var circleAction = function(canvas, target) {
 }
 
 var clear = function() {
+    // Stop Animation
+    window.cancelAnimationFrame(state);
+    // state = undefined;
+
+    // Reset svg
     pic.innerHTML = '';
     x = null;
     y = null;
-}
-
-// Get circles
-var get_circles = function(canvas){
-    return canvas.children;
 }
 
 
@@ -68,35 +72,44 @@ var animate = function() {
     // Cancel existing animation
     window.cancelAnimationFrame(state);
 
-    children = get_circles(pic)
-    console.log(children);
-    for (x = 0; x < children.length; x++) {
-        console.log(children.length);
-        child = children[x]
-        x = child.getAttribute("cx");
-        y = child.getAttribute("cy");
-        r = child.getAttribute("r");
-        color = child.getAttribute("fill");
-        stroke = child.getAttribute("stroke");
+    circles = pic.childNodes;
+
+    for (i = 0; i < circles.length; i++) {
+        target = circles[i]
+
+        // Circles
+        x = parseInt(target.getAttribute("cx"));
+        y = parseInt(target.getAttribute("cy"));
+        r = parseInt(target.getAttribute("r"));
+        x_trans = parseInt(target.getAttribute("xSpeed"));
+        y_trans = parseInt(target.getAttribute("ySpeed"));
 
         // Touches the horizontal edge
-        if (x + r<= 0 || x - r >= 500) {
-            xspeed = -1*xspeed;
+        if (x - r<= 0 || x + r >= 500) {
+            x_trans = -1*x_trans;
+            target.setAttribute("xSpeed", x_trans);
         }
 
         // Touches the vertical edge
-        if (y + r <= 0 || y - r >= 500) {
-            yspeed = -1*yspeed;
+        if (y - r <= 0 || y + r >= 500) {
+            y_trans = -1*y_trans;
+            target.setAttribute("ySpeed", y_trans);
         }
 
+        // Add translations
+        x += x_trans;
+        y += y_trans;
+
         // Apply translations
-        x += xspeed;
-        y += yspeed;
-        pic.removeChild(child);
-        circle(x, y, r, color, stroke);
+        target.setAttribute("cx", x);
+        target.setAttribute("cy", y);
     }
+
     state = window.requestAnimationFrame(animate);
 }
+
+// Remove weird text in the svg
+pic.innerHTML = "";
 
 // Event Listeners
 pic.addEventListener('click', function(e) {
