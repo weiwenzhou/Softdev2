@@ -1,5 +1,7 @@
 # Team XZ - Wei Wen Zhou, Sophia Xia
 # Softdev pd8
+# K19 -- Ready, Set, Math!
+# 2019-4-16
 
 # VARIABLES===========================================================
 TEST = [1,2,3,4,5]
