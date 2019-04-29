@@ -1,12 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
     <head>
         <title> 2006-2012 School Demographic</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <style>
+        table,td {
+            border:solid
+        }
+        </style>
     </head>
     <body>
 
+    <h1> 2006 - 2012 School Demographic </h1>
+    <hr>
+    <p>
+       The total number of students enrolled in NYC public schools
+       during the <span class="year">2005-2006</span> school year is
+       <span id="total" style="text-decoration:underline"></span>
+       students.
+       <br>
+       <h3>
+           Individual Statistics about the <span class="year">2005-2006</span> school year:
+       </h3>
+       <ul>
+           <li>
+               <span id="female_total"></span> female students
+               ( <span id="female_per"></span> % of student population)
+           </li>
+           <li>
+               <span id="male_total"></span> male students
+               ( <span id="male_per"></span> % of student population)
+           </li>
+           <li>
+               <p> Count of Students by Grade</p>
+               <table>
+                   <tr>
+                       <td> Pre-K</td>
+                       <td> K</td>
+                       <td> Grade 1</td>
+                       <td> Grade 2</td>
+                       <td> Grade 3</td>
+                       <td> Grade 4</td>
+                       <td> Grade 5</td>
+                       <td> Grade 6</td>
+                       <td> Grade 7</td>
+                       <td> Grade 8</td>
+                       <td> Grade 9</td>
+                       <td> Grade 10</td>
+                       <td> Grade 11</td>
+                       <td> Grade 12</td>
+                   </tr>
+                   <tr>
+                       <td id="prek"></td>
+                       <td id="k"></td>
+                       <td id="grade1"></td>
+                       <td id="grade2"></td>
+                       <td id="grade3"></td>
+                       <td id="grade4"></td>
+                       <td id="grade5"></td>
+                       <td id="grade6"></td>
+                       <td id="grade7"></td>
+                       <td id="grade8"></td>
+                       <td id="grade9"></td>
+                       <td id="grade10"></td>
+                       <td id="grade11"></td>
+                       <td id="grade12"></td>
+                   </tr>
+               </table>
+               <br>
+           </li>
+       </ul>
+   </p>
+
     </body>
-    
+
     <script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </html>
