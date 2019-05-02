@@ -36,7 +36,7 @@ def fib():
 # fib_gen = fib()
 # print(fib_gen(10))
 
-def memorize():
+def memorization():
     memo = {}
     def inner(n):
         if (n not in memo.keys()):
@@ -50,5 +50,5 @@ def fib(n):
     else:
         return fib(n-1) + fib(n-2)
 
-fib_gen = memorize()
+fib_gen = memorization()
 print(fib_gen(40))
